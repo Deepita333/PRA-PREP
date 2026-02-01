@@ -1,0 +1,67 @@
+Create a class Product with the following attributes:
+
+productId – int
+productName – string
+category – string
+price – double
+
+Write the necessary getters and setters for all the attributes and a parameterized constructor.
+
+Create a class Solution and implement the following static methods using a List of Product objects:
+
+addProduct
+This method should take a List of Product objects and a Product object as parameters and add the given Product to the list.
+
+getProductsByCategory
+This method should take a List of Product objects and a searchCategory string as parameters and return a list of Product objects whose category matches the searchCategory (case insensitive).
+
+updateProductPrice
+This method should take a List of Product objects, a productId, and a newPrice as parameters.
+It should update the price of the Product whose productId matches the given value.
+Return true if the price is updated successfully, otherwise return false.
+
+deleteProductById
+This method should take a List of Product objects and a productId as parameters.
+It should delete the Product whose productId matches the given value.
+Return true if the product is deleted successfully, otherwise return false.
+
+In the main method:
+
+Create a List of Product objects.
+
+Read the details of four Product objects in the following order:
+productId
+productName
+category
+price
+
+Add each Product object to the list using the addProduct method.
+
+Read a string value searchCategory.
+
+Call getProductsByCategory method and for each returned Product object:
+
+Print "Expensive Product" if the price is greater than 50000
+
+Otherwise, print "Affordable Product"
+
+Read an integer value productId and a double value newPrice.
+
+Call updateProductPrice method and print:
+
+"Price Updated" if the method returns true
+
+"Product Not Found" if the method returns false
+
+Read an integer value productId.
+
+Call deleteProductById method and print:
+
+"Product Deleted" if the method returns true
+
+"Product Not Found" if the method returns false
+
+Constraints:
+Use List<Product> only.
+Perform case insensitive string comparison.
+Do not use LINQ unless explicitly mentioned.
