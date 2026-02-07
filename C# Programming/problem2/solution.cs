@@ -1,109 +1,82 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-class Course
+public class Course
 {
-    private int courseId;
-    private string courseName;
-    private string courseAdmin;
-    private int quiz;
-    private int handson;
-
-    // Parameterized constructor
-    public Course(int courseId, string courseName, string courseAdmin, int quiz, int handson)
-    {
-        this.courseId = courseId;
-        this.courseName = courseName;
-        this.courseAdmin = courseAdmin;
-        this.quiz = quiz;
-        this.handson = handson;
-    }
-
-    // Getters
-    public int GetCourseId() { return courseId; }
-    public string GetCourseName() { return courseName; }
-    public string GetCourseAdmin() { return courseAdmin; }
-    public int GetQuiz() { return quiz; }
-    public int GetHandson() { return handson; }
+    public int courseId { get; set; }
+    public string courseName { get; set; }
+    public string courseAdmin { get; set; }
+    public int quiz { get; set; }
+    public int handson { get; set; }
 }
 
-class CourseProgram
+public class HelloWorld
 {
     public static void Main(string[] args)
     {
-        Course[] courses = new Course[4];
+        List<Course> l = new List<Course>();
 
         for (int i = 0; i < 4; i++)
         {
-            int id = int.Parse(Console.ReadLine());
-            string name = Console.ReadLine();
-            string admin = Console.ReadLine();
-            int quiz = int.Parse(Console.ReadLine());
-            int handson = int.Parse(Console.ReadLine());
-
-            courses[i] = new Course(id, name, admin, quiz, handson);
+            Course m = new Course();
+            m.courseId = Convert.ToInt32(Console.ReadLine());
+            m.courseName = Console.ReadLine();
+            m.courseAdmin = Console.ReadLine();
+            m.quiz = Convert.ToInt32(Console.ReadLine());
+            m.handson = Convert.ToInt32(Console.ReadLine());
+            l.Add(m);
         }
-
-        string adminToSearch = Console.ReadLine();
-        int handsonLimit = int.Parse(Console.ReadLine());
-
-        int avgQuiz = findAvgOfQuizByAdmin(courses, adminToSearch);
-        if (avgQuiz != 0)
-            Console.WriteLine(avgQuiz);
+        string s = Console.ReadLine();
+        int n = findAvgOfQuizByAdmin(l, s);
+        if (n != 0)
+            Console.WriteLine(n);
         else
-            Console.WriteLine("No Course found");
+            Console.WriteLine("No such courseId exists");
+        int k = Convert.ToInt32(Console.ReadLine());
+        List<Course> res = sortCourseByHandsOn(l, k);
 
-        Course[] sortedCourses = sortCourseByHandsOn(courses, handsonLimit);
-        if (sortedCourses != null)
+        if (res.Count > 0)
         {
-            foreach (Course c in sortedCourses)
+            foreach (Course c in res.OrderBy(x => x.handson))
             {
-                Console.WriteLine(c.GetCourseName());
+                Console.WriteLine(c.courseName);
             }
         }
         else
         {
-            Console.WriteLine("No Course found with mentioned attribute.");
+            Console.WriteLine("No Course found with mentioned attributes.");
         }
     }
 
-    // Method 1
-    public static int findAvgOfQuizByAdmin(Course[] courses, string admin)
+    public static int findAvgOfQuizByAdmin(List<Course> l, string s)
     {
-        int sum = 0, count = 0;
+        int sum = 0;
+        int count = 0;
 
-        foreach (Course c in courses)
+        foreach (Course i in l)
         {
-            if (c.GetCourseAdmin().Equals(admin, StringComparison.OrdinalIgnoreCase))
+            if (i.courseAdmin.Equals(s, StringComparison.OrdinalIgnoreCase))
             {
-                sum += c.GetQuiz();
+                sum += i.quiz;
                 count++;
             }
         }
 
-        if (count > 0)
-            return sum / count;
-        else
-            return 0;
+        return (count > 0) ? sum / count : 0;
     }
 
-    // Method 2
-    public static Course[] sortCourseByHandsOn(Course[] courses, int limit)
+    public static List<Course> sortCourseByHandsOn(List<Course> l, int k)
     {
-        List<Course> list = new List<Course>();
+        List<Course> o = new List<Course>();
 
-        foreach (Course c in courses)
+        foreach (Course i in l)
         {
-            if (c.GetHandson() < limit)
+            if (i.handson < k)
             {
-                list.Add(c);
+                o.Add(i);
             }
         }
-
-        if (list.Count == 0)
-            return null;
-
-        list.Sort((a, b) => a.GetHandson().CompareTo(b.GetHandson()));
-        return list.ToArray();
+        return o;
     }
 }
