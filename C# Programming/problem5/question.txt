@@ -1,0 +1,128 @@
+Problem Statement
+
+Create a class Employee with the following private attributes:
+
+employeeId : int
+employeeName : String
+department : String
+salary : double
+experience : int
+
+Write getters, setters, and a parameterized constructor for the Employee class.
+
+Create a class Solution with the main method.
+
+Implement the following static methods:
+
+getAverageSalaryByDepartment
+
+Method Parameters:
+
+Array/List of Employee objects
+
+String department name
+
+Return Type:
+
+double
+
+Logic:
+
+Calculate and return the average salary of employees belonging to the given department.
+
+Department comparison should be case-insensitive.
+
+If no employee exists for the given department, return 0.0.
+
+Hint:
+
+You must use a Dictionary where:
+Key → department name
+Value → total salary / count
+
+getExperiencedEmployeesByDepartment
+
+Method Parameters:
+
+Array/List of Employee objects
+
+int experience value
+
+Return Type:
+
+Dictionary<String, List<Employee>>
+
+Logic:
+
+Group employees by department.
+
+Include only those employees whose experience is greater than or equal to the given experience value.
+
+Return a Dictionary where:
+Key → department name
+Value → list of eligible Employee objects.
+
+If no such employees exist, return an empty Dictionary.
+
+Note:
+
+Dictionary usage is mandatory.
+
+Main Method Logic
+
+Read details for N Employee objects.
+
+Read a department name.
+
+Call getAverageSalaryByDepartment.
+
+If the returned value is greater than 0, print the average salary formatted to 2 decimal places.
+
+Otherwise, print "No Employee found".
+
+Read an experience value.
+
+Call getExperiencedEmployeesByDepartment.
+
+If the returned dictionary is not empty:
+
+Print the department name.
+
+Under each department, print the employeeName of each eligible employee.
+
+Otherwise, print "No Employee found with given experience".
+
+Sample Input
+
+4
+101
+Amit
+HR
+50000
+5
+102
+Riya
+IT
+70000
+4
+103
+John
+HR
+60000
+6
+104
+Neha
+IT
+80000
+7
+HR
+5
+
+Sample Output
+
+55000.00
+HR
+Amit
+John
+IT
+Neha
